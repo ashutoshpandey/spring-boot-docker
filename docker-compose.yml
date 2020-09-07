@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  dbhost:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: 'test'
+      MYSQL_USER: 'ashutosh'
+      MYSQL_PASSWORD: 'ashutosh'
+      MYSQL_ROOT_PASSWORD: 'ashutosh'
+    ports:
+      - "3307:3306"
+    restart: always     
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: docker-boot
+    depends_on: 
+      - dbhost
+    ports:
+      - '8888:8888'
+      
